@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AJAX EXAM</title>
+	<script src="https://use.fontawesome.com/c25a5a771c.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Roboto" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+
+	<header>
+		<br />
+		<h1><b>Deck Of Cards!</b></h1>
+	</header>
+</head>
+
+<body>
+
+	<ul id="cards">
+		<li><img src="http://deckofcardsapi.com/static/img/AS.png" </li>
+			<li><img src="http://deckofcardsapi.com/static/img/KH.png" </li>
+	</ul>
+	<ul class="list-inline">
+		<li><a href="#" class="btn btn-default btn-lg shuffle-card"><i class="fa fa-diamond" aria-hidden="true"></i> Shuffle cards </a></li>
+		<li><a href="#" class="btn btn-default btn-lg draw-card"><i class="fa fa-clone" aria-hidden="true"></i> Draw card </a></li>
+		<li><a href="#" class="btn btn-default btn-lg new-deck"><i class="fa fa-check-circle-o" aria-hidden="true"></i> New deck </a></li>
+	</ul>
+
+
+
+	<ul class="card-box">
+		<li id="shuffled"></li>
+	</ul>
+
+
+
+
+
+	<div id="draw">
+
+	</div>
+	<div id="newdeck">
+
+	</div>
+	<input type="reset" value="Reset" class="btn btn-default btn-lg reset" onclick="window.location.reload() ">
+
+
+
+
+
+
+
+
+	<!-- <div class="mb-3 ">
+		<input type="text " value="Cards " id="inputCards " />
+	</div>
+	<div id="yourCard ">
+
+	</div> -->
+
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.js " integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin=" anonymous "></script>
+	<script src="js/main.js "></script>
+</body>
+
+</html>
