@@ -48,7 +48,7 @@ $(document).ready(function(){
 
         $.ajax({
           type: 'GET',
-          url: 'http://deckofcardsapi.com/api/deck/new/draw/?count=2',
+          url: 'https://deckofcardsapi.com/api/deck/new/draw/?count=2',
           dataType: 'json',
 
           success: (data) => {
