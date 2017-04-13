@@ -23,5 +23,5 @@ http://deckofcardsapi.com/ är ett API som tillåter en att t.ex. spela kort om 
 
 
 ### Namn: Peter Sandqvist
-### : Frontend developer, FEND16
-### : JavaScript 2
+### Utbildning: Frontend developer, FEND16
+### Kurs: JavaScript 2
