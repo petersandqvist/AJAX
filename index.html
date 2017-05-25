@@ -11,45 +11,25 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 
 
-	<header>
-		<br />
-		<h1><b>Deck Of Cards!</b></h1>
-	</header>
+
 </head>
 
 <body>
 
-	<ul id="cards">
-		<li><img src="http://deckofcardsapi.com/static/img/AS.png" </li>
-			<li><img src="http://deckofcardsapi.com/static/img/KH.png" </li>
-	</ul>
-	<ul class="list-inline">
-		<li><a href="#" class="btn btn-default btn-lg shuffle-card"><i class="fa fa-diamond" aria-hidden="true"></i> Shuffle cards </a></li>
-		<li><a href="#" class="btn btn-default btn-lg draw-card"><i class="fa fa-clone" aria-hidden="true"></i> Draw card </a></li>
-		<li><a href="#" class="btn btn-default btn-lg new-deck"><i class="fa fa-check-circle-o" aria-hidden="true"></i> New deck </a></li>
-	</ul>
+	<h1><b>Deck Of Cards!</b></h1>
 
 
+	<article id="twentyone" class="col-xs-12 col-sm-12 col-md-12">
+		<h3 class="game-title">Twenty One</h3>
+		<input type="button" id="open-bj" class="btn btn-success" value="Draw Cards">
+		<input type="button" class="btn btn-default" id="reload-bj" value="New Game">
 
-	<ul class="card-box">
-		<li id="shuffled"></li>
-	</ul>
-
-
-
-
-
-	<div id="draw">
-
-	</div>
-	<div id="newdeck">
-
-	</div>
-	<input type="reset" value="Reset" class="btn btn-default btn-lg reset" onclick="window.location.reload() ">
-
-
-
-
+		<div class="cardTable-bj after-loading2">
+			<div id="bj-cards" class="bjFigure"></div>
+			<div class="text-center" id="bj-counter"></div>
+			<div class="optionalButton after-loading2"></div>
+		</div>
+	</article>
 
 
 

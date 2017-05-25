@@ -1,6 +1,6 @@
 header {
   text-align: center;
-  color: black;
+  color: white;
   font-size: 2em;
   font-family: 'Roboto', sans-serif; }
 
@@ -36,3 +36,14 @@ li {
 
 .shuffle-card, .draw-card, .new-deck, .reset {
   color: red; }
+
+input [type=reset] {
+  color: yellow; }
+
+@media (max-width: 480px) {
+  #draw {
+    font-size: 1.7em; }
+  h1 {
+    font-size: 1em; }
+  .card-box, #newdeck {
+    font-size: 1.2em; } }

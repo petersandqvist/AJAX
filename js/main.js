@@ -1,95 +1,159 @@
-$(document).ready(function(){
+$(function(){
+  let deckID;
+  let points=0;
+  let newCard;
+  let result;
+  let printToHtml="";
+  let mapCards;
+  let cardArray;
+  let cardTable=$('#bj-cards');
+  let btn_option=$('.optionalButton');
 
 
-  function shuffleCard() {
+  $('#open-bj').on('click', function(){
+      $(this).fadeOut();
+      $('.loading2').fadeIn('slow').delay(800).fadeOut('slow');
+      $('.after-loading2').delay(2000).fadeIn();
+  }).on('click', function(){
+      $.ajax({
+          method: 'GET',
+          url: 'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1',
+          dataType: 'json'
+  })
+  .done(getDeckId)
+  .done(drawTwoCards)
+  .fail(err=>err);
+});
+let getDeckId = res => {
+  deckID=res.deck_id;
+  return deckID;
+};
+let setUrl = (id, numberOfCards)=> {
+  return `https://deckofcardsapi.com/api/deck/${id}/draw/?count=${numberOfCards}`;
+};
 
+let setCardImage = cardObject => {
+  return `<figure>
+              <img class="bj-img" src="${cardObject.image}" alt="${cardObject.code}">
+          </figure>`;
+};
+  //Second
+
+  let drawTwoCards = () => {
+    let drawTwoUrl = setUrl(deckID, 2);
     $.ajax({
-          type: 'GET',
-          dataType:'json',
-          url: 'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6',
+      method: 'GET',
+      url: drawTwoUrl,
+      dataType: 'json'
 
-          success: (data) => {
-            $('#shuffled').text(data.shuffled);
-                $('#shuffled').text('Cards shuffled!');
-                console.log('success', data);
-          },
+    })
+    .done(showHand)
+    .done(addButtons)
+    .done(countPoint)
+    .fail(err=>err);
+  };
 
-          error: () => {
-            alert("error, not working");
-          }
+  let showHand = res => {
+    cardArray = res.cards;
+    cardArray.map(card => {
+      printToHtml+=setCardImage(card);
+      return printToHtml;
+    });
+    cardTable.hide().delay(1200).fadeIn().html(printToHtml);
+  };
 
+  let addButtons = () => {
 
-        });
+    let buttons=`<input class="btn btn-default" id="btn-drawone" type="button" value="Add One More Card">
+                <input class="btn btn-info" id="btn-done" type="button" value="Done">`;
+    btn_option.hide().delay(1200).html(buttons);
 
-          //event prevents the browser to go to the top of the page when
-          //the button is clicked. on click calls the shuffleCard
-          //function which triggers the shuffle of the deck of cards
-      };
-      $('.shuffle-card').on('click', function(event){
-        event.preventDefault();
-        shuffleCard();
+    $('#btn-drawone')
+      .on('click', drawOneMore);
+    $('#btn-done')
+      .on('click', showResult)
+      .on('click', function(){
+        $('#reload-bj').delay(2000).fadeIn('slow');
       });
+  };
 
-
-      function face_card(card) {
-        switch (card) {
-          case "JACK":
-          case "QUEEN":
-          case "KING":
-            return "FACE";
-        };
+  let countPoint = () => {
+    cardArray.map(item => {
+      if(isNaN(item.value)) {
+        if(item.value === "ACE") {
+          points+=11;
+        }else if(item.value === "JACK") {
+          points+=10;
+        }else if(item.value === "QUEEN") {
+          points+=10;
+        }else if(item.value === "KING") {
+          points+=10;
+        }
+      }else {
+        points+=Number(item.value);
       };
+      if(points === 21) {
+        result = 'BLACKJACK';
+      }else if(points>=22){
+        result = 'Bust';
+      } else {
+        result=points;
+      };
+    });
+  };
+  //Third
+  let drawOneMore = () => {
+    let drawOneUrl = setUrl(deckID, 1);
+    $.ajax({
+      method: 'GET',
+      url: drawOneUrl,
+      datatype: 'json'
+    })
+    .done(getFinalHand)
+    .done(showFinalCards)
+    .done(countFinalPoint);
+  };
 
-      $draw = $('#draw');
+  let getFinalHand = res => {
+    newCard = res.cards[0];
+    cardArray.push(newCard);
+    return cardArray;
+  };
 
-      $('.draw-card').on("click", function(event) {
-          event.preventDefault();
-        $draw.html("");
+  let showFinalCards = () => {
+    cardTable.append(setCardImage(newCard));
+  };
 
-        $.ajax({
-          type: 'GET',
-          url: 'https://deckofcardsapi.com/api/deck/new/draw/?count=2',
-          dataType: 'json',
+  let countFinalPoint = () => {
+    if(isNaN(newCard.value)) {
+      if(newCard.value === "ACE") {
+        points+=11;
+      }else if(newCard.value === "JACK") {
+        points+=10;
+      }else if(newCard.value === "QUEEN") {
+        points+=10;
+      }else if(newCard.value === "KING") {
+        points+=10;
+      }
+    }else {
+      points+=Number(newCard.value);
+    };
+    if(points === 21) {
+      result = 'Blackjack';
+    }else if(points>=22) {
+      result = 'Bust';
+    }else {
+      result=points;
+    };
+  };
 
-          success: (data) => {
-            //each goes trough each item in the array and allows me
-            //run a function based off the item
-            $(data.cards).each(function(i, card){
-              $draw.append('<p>'+ card.value + ' '  +  card.suit + '</p>');
+  let showResult = () => {
+    $('.optionalButton, #bj-cards').fadeOut();
+    $('#bj-counter').html(result).delay(700).fadeIn('slow');
+  };
 
-              if (data.cards[0].value == "ACE" || data.cards[1].value == "ACE" || face_card(data.cards[0].value) == "FACE" || face_card(data.cards[1].value) == "FACE") {
-              $draw.html("BLACKJACK!");
-            };
-            console.log('success', data);
-          });
-          error: () =>{
-            alert("No more cards");
-          }
-        },
+$('#reload-bj').on('click', function(){
+  location.reload(false);
+});
 
-      });
-      })
-      $newdeck = $('#newdeck');
-
-      $('.new-deck').on("click", function(event){
-        event.preventDefault();
-
-
-        $.ajax({
-          type: 'GET',
-          url: 'https://deckofcardsapi.com/api/deck/new/',
-          dataType: 'json',
-
-          success: (data2) => {
-            $('#newdeck').text(data2.shuffled);
-                $('#newdeck').text('Brand new deck!');
-                console.log('success', data2);
-          },
-            error: () => {
-              alert("Error, new deck not working");
-            }
-        });
-      })
-
-
-     });
+});
