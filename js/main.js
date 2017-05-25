@@ -10,7 +10,7 @@ $(function(){
   let btn_option=$('.optionalButton');
 
 
-  $('#open-bj').on('click', function(){
+  $('#open-blackjack').on('click', function(){
       $(this).fadeOut();
       $('.loading2').fadeIn('slow').delay(800).fadeOut('slow');
       $('.after-loading2').delay(2000).fadeIn();
@@ -141,7 +141,7 @@ let setCardImage = cardObject => {
     if(points === 21) {
       result = 'Blackjack';
     }else if(points>=22) {
-      result = 'Bust';
+      result = 'Bust!!';
     }else {
       result=points;
     };
