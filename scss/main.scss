@@ -3,6 +3,17 @@
 }
 
 
+.bjFigure {
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  padding-top: 10rem;
+}
+
+.bj-img {
+  margin: 0 2em;
+}
 @media (max-width: 480px){
 
 }
