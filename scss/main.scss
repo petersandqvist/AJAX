@@ -1,5 +1,9 @@
+body {
+  font-family: 'Hind'
+}
 #twentyone, h1 {
   text-align: center;
+  
 }
 
 
@@ -14,6 +18,12 @@
 .bj-img {
   margin: 0 2em;
 }
+
+#bj-counter {
+  font-size: 5em;
+}
+
+
 @media (max-width: 480px){
 
 }

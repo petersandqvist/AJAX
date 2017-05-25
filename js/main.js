@@ -95,7 +95,7 @@ let setCardImage = cardObject => {
       if(points === 21) {
         result = 'BLACKJACK';
       }else if(points>=22){
-        result = 'Bust!!';
+        result = 'Bust';
       } else {
         result=points;
       };
@@ -139,9 +139,9 @@ let setCardImage = cardObject => {
       points+=Number(newCard.value);
     };
     if(points === 21) {
-      result = alert ('Blackjack');
+      result = 'Blackjack';
     }else if(points>=22) {
-      result = alert('Bust!!');
+      result = 'Bust';
     }else {
       result=points;
     };
