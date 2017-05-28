@@ -66,14 +66,14 @@ let setCardImage = cardObject => {
 
     let buttons=`<input class="btn btn-default" id="btn-drawone" type="button" value="Add One More Card">
                 <input class="btn btn-info" id="btn-done" type="button" value="Done">`;
-    btn_option.hide().delay(1200).html(buttons);
+    btn_option.hide().delay(1000).html(buttons);
 
     $('#btn-drawone')
       .on('click', drawOneMore);
     $('#btn-done')
       .on('click', showResult)
       .on('click', function(){
-        $('#reload-bj').delay(2100).fadeIn('slow');
+        $('#reload-bj').delay(1900).fadeIn('slow');
       });
   };
 //check the value of the cards and count the points based on the cards
