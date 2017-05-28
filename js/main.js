@@ -5,11 +5,11 @@ $(function(){
   let result;
   let printToHtml="";
   let mapCards;
-  let cardArray;
+  let cardArr;
   let cardTable=$('#bj-cards');
   let btn_option=$('.optionalButton');
 
-
+//first call
   $('#open-blackjack').on('click', function(){
       $(this).fadeOut();
       $('.loading2').fadeIn('slow').delay(800).fadeOut('slow');
@@ -37,7 +37,7 @@ let setCardImage = cardObject => {
               <img class="bj-img" src="${cardObject.image}" alt="${cardObject.code}">
           </figure>`;
 };
-  //Second
+  //Second call
 
   let drawTwoCards = () => {
     let drawTwoUrl = setUrl(deckID, 2);
@@ -54,12 +54,12 @@ let setCardImage = cardObject => {
   };
 
   let showHand = res => {
-    cardArray = res.cards;
-    cardArray.map(card => {
+    cardArr = res.cards;
+    cardArr.map(card => {
       printToHtml+=setCardImage(card);
       return printToHtml;
     });
-    cardTable.hide().delay(1200).fadeIn().html(printToHtml);
+    cardTable.hide().delay(1300).fadeIn().html(printToHtml);
   };
 
   let addButtons = () => {
@@ -73,12 +73,12 @@ let setCardImage = cardObject => {
     $('#btn-done')
       .on('click', showResult)
       .on('click', function(){
-        $('#reload-bj').delay(2000).fadeIn('slow');
+        $('#reload-bj').delay(2100).fadeIn('slow');
       });
   };
-
+//check the value of the cards and count the points based on the cards
   let countPoint = () => {
-    cardArray.map(item => {
+    cardArr.map(item => {
       if(isNaN(item.value)) {
         if(item.value === "ACE") {
           points+=11;
@@ -116,8 +116,8 @@ let setCardImage = cardObject => {
 
   let getFinalHand = res => {
     newCard = res.cards[0];
-    cardArray.push(newCard);
-    return cardArray;
+    cardArr.push(newCard);
+    return cardArr;
   };
 
   let showFinalCards = () => {
