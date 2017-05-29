@@ -24,7 +24,9 @@ body {
 #bj-counter {
   font-size: 5em;
   color: lightsteelblue;
+ 
 }
+
 
 .background-image {
   position: relative;
@@ -33,6 +35,11 @@ body {
   background-image: url('../img/javascript-deck-of-cards.jpg');
   background-position: center;
   background-size: cover;
+}
+
+.optionalButton {
+  padding: 1em;
+  margin: 1em;
 }
 
 
